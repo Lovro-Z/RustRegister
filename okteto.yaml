@@ -1,0 +1,19 @@
+initContainer:
+  image: okteto/bin:1.3.6
+name: outbound-call-enabler-svc
+image: rust
+imagePullPolicy: IfNotPresent
+command: bash
+sync:
+  - .:/usr/src/app
+autocreate: true
+persistentVolume:
+  enabled: false
+environment:
+  - DB_HOST=http://registar-couchdb-svc-couchdb:5984
+  - DB_NAME=sudski_registar
+  - DB_USER=admin
+  - DB_PASSWORD=CXWkxgN8F5bEco6j1UOy
+  - SUD_REG_TOKEN=fd2756eee54b4b25b59b586a9185ea3b
+forward:
+  - 8080:8080
